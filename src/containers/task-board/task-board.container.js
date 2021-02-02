@@ -6,7 +6,16 @@ import { connect } from 'react-redux';
 import { STATUS } from '../../common/contants';
 import { bindActionCreators } from 'redux';
 import * as taskActions from '../../actions/task.action';
+import { Dialog } from 'primereact/dialog';
+import TaskFormComponent from '../../components/task-form/task-form.component';
 class TaskBoardContainer extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            visible: true
+        }
+    }
 
     componentDidMount() {
         const {taskActions} = this.props;
@@ -29,12 +38,24 @@ class TaskBoardContainer extends Component {
         return taskBoadElm;
     }
 
+    handleShowTaskForm() {
+        this.setState({
+            visible: true
+        })
+    }
+
+    onHide = () => {
+        this.setState({
+            visible: false
+        })
+    }
+    
     render() {
         return (
             <div className="p-p-2">
                 <div className="p-grid">
                     <div className="p-col p-text-right">
-                        <Button label="Add" icon="pi pi-plus" />
+                        <Button label="Add" icon="pi pi-plus" onClick={() => this.handleShowTaskForm()} />
                     </div>
                 </div>
                 <div className="p-grid">
@@ -42,6 +63,11 @@ class TaskBoardContainer extends Component {
                     this.renderTaskBoard()
                 }
                 </div>
+                
+            <Dialog header="Task form" visible={this.state.visible}
+                    style={{width: '50vw'}} modal onHide={() => this.onHide()}>
+                <TaskFormComponent></TaskFormComponent>
+            </Dialog>
             </div>
         )
     }
