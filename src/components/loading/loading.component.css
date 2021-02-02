@@ -17,11 +17,14 @@
     bottom: 0;
     border-radius: 50%;
     box-shadow: 0 0 15px 5px rgba(100, 100, 100, 0.8);
-    -webkit-animation :spin 3.5s linear infinite;
+    -webkit-animation :spin 5s linear infinite;
 }
 
 @keyframes spin {
+    0%{
+        -webkit-transform: rotate(-0deg);
+    }
     100%{
-        -webkit-transform: rotate(360deg);
+        -webkit-transform: rotate(-360deg);
     }
 }
