@@ -12,10 +12,10 @@ export const fetchListTaskRequest = () => {
     return dispatch => {
         dispatch(fetchListTask())
         taskApis.getList().then(response => {
-            dispatch(showToast(TOAST.SEVERITY.SUCCESS,
-                'Thành công', 'Lấy dữ liệu thành công'));
+            // dispatch(showToast(TOAST.SEVERITY.SUCCESS,
+            //     'Thành công', 'Lấy dữ liệu thành công'));
             dispatch(fetchListTaskSuccess(response.data))
-            dispatch(closeToast());
+            // dispatch(closeToast());
         }).catch(error => {
             dispatch(fetchListTaskFail(error))
             dispatch(showToast(TOAST.SEVERITY.ERROR,

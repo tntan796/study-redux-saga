@@ -1,10 +1,12 @@
 import {combineReducers} from 'redux';
+import loadingReducer from './loading.reducer';
 import taskReducer from './task.reducer';
-import toastReducer from './toast-reducer';
+import toastReducer from './toast.reducer';
 
 const rootReducer = combineReducers({
     task: taskReducer,
-    toast: toastReducer
+    toast: toastReducer,
+    isLoading: loadingReducer
 })
 
 export default rootReducer;

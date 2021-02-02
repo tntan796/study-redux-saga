@@ -1,0 +1,27 @@
+.loading {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background: rgba(167, 216, 248, 0.6);
+}
+.icon {
+    height: 150px;
+    width: 150px;
+    margin: auto;
+    left: 0;
+    right: 0;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    border-radius: 50%;
+    box-shadow: 0 0 15px 5px rgba(100, 100, 100, 0.8);
+    -webkit-animation :spin 3.5s linear infinite;
+}
+
+@keyframes spin {
+    100%{
+        -webkit-transform: rotate(360deg);
+    }
+}
