@@ -1,6 +1,7 @@
 import { ACTION_TYPES } from "../common/contants"
 import * as taskApis from '../apis/task.api';
 import { closeToast, showToast} from './toast.action';
+import { showLoading, hideLoading} from './loading.action';
 import {TOAST} from '../common/contants';
 /**
  * Bước 1: Reset list task về rỗng: fetchListTask
@@ -11,16 +12,19 @@ import {TOAST} from '../common/contants';
 export const fetchListTaskRequest = () => {
     return dispatch => {
         dispatch(fetchListTask())
+        dispatch(showLoading());
         taskApis.getList().then(response => {
             // dispatch(showToast(TOAST.SEVERITY.SUCCESS,
             //     'Thành công', 'Lấy dữ liệu thành công'));
+            // dispatch(closeToast()); 
             dispatch(fetchListTaskSuccess(response.data))
-            // dispatch(closeToast());
+            dispatch(hideLoading());
         }).catch(error => {
             dispatch(fetchListTaskFail(error))
             dispatch(showToast(TOAST.SEVERITY.ERROR,
                 'Thành công', 'Lấy dữ liệu thất bại'));
             dispatch(closeToast());
+            // dispatch(hideLoading());
         });
     }
 }
