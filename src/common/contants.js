@@ -1,10 +1,12 @@
 export const ACTION_TYPES = {
     FETCH_LIST_TASK: 'fetch list task',
     FETCH_LIST_TASK_SUCCESS: 'fetch list task success',
-    FETCH_LIST_TASK_FAIL: 'fetch list task fail'
+    FETCH_LIST_TASK_FAIL: 'fetch list task fail',
+    SHOW_TOAST_MESSAGE: 'show toast message',
+    CLOSE_TOAST_MESSAGE: 'close toast message'
 }
 
-export const API_ENDPOINT = 'http://localhost:3000';
+export const API_ENDPOINT = 'http://localhost:3210';
 
 export const STATUS = [
     {
@@ -20,3 +22,13 @@ export const STATUS = [
         label: 'COMPLETE'
     }
 ]
+
+
+export const TOAST = {
+    SEVERITY: {
+        SUCCESS: 'success',
+        INFO: 'info',
+        WARN: 'warn',
+        ERROR: 'error'
+    }
+}

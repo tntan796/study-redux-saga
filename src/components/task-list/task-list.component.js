@@ -3,17 +3,22 @@ import TaskItemComponent from '../task-item/task-item.component';
 import './task-list.component.css';
 
 export default class TaskListComponent extends Component {
-
-    constructor(props) {
-        super(props);
+    renderTaskItem() {
+        const {tasks} = this.props;
+        let taskItemElm = null;
+        taskItemElm = tasks.map((task, index) => {
+            return(
+                <TaskItemComponent key = {index} task = {task}></TaskItemComponent>
+            );
+        });
+        return taskItemElm;
     }
-
     render() {
+        const {status} = this.props;
         return (
             <div className="p-col">
-                <h4>Ready</h4>
-                <TaskItemComponent></TaskItemComponent>
-                <TaskItemComponent></TaskItemComponent>
+                <h4>{status}</h4>
+                {this.renderTaskItem()}
             </div>
         )
     }

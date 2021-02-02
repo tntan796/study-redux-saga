@@ -2,6 +2,7 @@ import axios from 'axios';
 class AxiosBaseService {
     constructor() {
         const instance = axios.create();
+        instance.interceptors.response.use(this.handleSuccess, this.handleError);
         this.instance = instance;
     }
 
@@ -14,7 +15,7 @@ class AxiosBaseService {
     }
 
     get(url) {
-        return this.instance.get(`${API_ENDPOINT}/${url }`);
+        return this.instance.get(url);
     }
 }
 

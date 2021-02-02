@@ -1,4 +1,29 @@
 import { ACTION_TYPES } from "../common/contants"
+import * as taskApis from '../apis/task.api';
+import { closeToast, showToast} from './toast.action';
+import {TOAST} from '../common/contants';
+/**
+ * Bước 1: Reset list task về rỗng: fetchListTask
+ * Bước 2: Gọi Api lấy data: fetchListTaskRequest
+ * Bước 3: Nếu thành công gọi fetchListTaskSuccess để cập nhật lại list với dữ liệu mới
+ *         Nếu thất bại gọi fetchListTaskFail
+ */
+export const fetchListTaskRequest = () => {
+    return dispatch => {
+        dispatch(fetchListTask())
+        taskApis.getList().then(response => {
+            dispatch(showToast(TOAST.SEVERITY.SUCCESS,
+                'Thành công', 'Lấy dữ liệu thành công'));
+            dispatch(fetchListTaskSuccess(response.data))
+            dispatch(closeToast());
+        }).catch(error => {
+            dispatch(fetchListTaskFail(error))
+            dispatch(showToast(TOAST.SEVERITY.ERROR,
+                'Thành công', 'Lấy dữ liệu thất bại'));
+            dispatch(closeToast());
+        });
+    }
+}
 
 export const fetchListTask = () => {
     return {
@@ -9,8 +34,8 @@ export const fetchListTask = () => {
 export const fetchListTaskSuccess = (response) => {
     return {
         type: ACTION_TYPES.FETCH_LIST_TASK_SUCCESS,
-        payloads: {
-            response
+        payload: {
+            tasks: response
         }
     }
 }
@@ -18,7 +43,7 @@ export const fetchListTaskSuccess = (response) => {
 export const fetchListTaskFail = (error) => {
     return {
         type: ACTION_TYPES.FETCH_LIST_TASK_FAIL,
-        payloads: {
+        payload: {
             error
         }
     }
