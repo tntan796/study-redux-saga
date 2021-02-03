@@ -8,6 +8,7 @@ import { bindActionCreators } from 'redux';
 import * as taskActions from '../../actions/task.action';
 import { Dialog } from 'primereact/dialog';
 import TaskFormComponent from '../../components/task-form/task-form.component';
+import SearchBoxComponent from '../../components/search-box/serach-box.component';
 class TaskBoardContainer extends Component {
 
     constructor(props) {
@@ -49,11 +50,18 @@ class TaskBoardContainer extends Component {
             visible: false
         })
     }
+
+    handleSearch = (data) => {
+        console.log('serach:', data);
+    }
     
     render() {
         return (
             <div className="p-p-2">
                 <div className="p-grid">
+                    <div className="p-col-3">
+                        <SearchBoxComponent handleSearch = {this.handleSearch}/>
+                    </div>
                     <div className="p-col p-text-right">
                         <Button label="Add" icon="pi pi-plus" onClick={() => this.handleShowTaskForm()} />
                     </div>
