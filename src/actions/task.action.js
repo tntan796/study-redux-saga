@@ -52,3 +52,30 @@ export const fetchListTaskFail = (error) => {
         }
     }
 }
+
+export const searchTask = (search) => {
+    return {
+        type: ACTION_TYPES.SEARCH_TASK,
+        payload: {
+            search
+        }
+    }
+}
+
+export const searchTaskSuccess = (response) => {
+    return {
+        type: ACTION_TYPES.SEARCH_TASK_SUCCESS,
+        payload: {
+            data: response
+        }
+    }
+}
+
+export const searchTaskFail = (error) => {
+    return {
+        type: ACTION_TYPES.SEARCH_TASK_FAIL,
+        payload: {
+            error
+        }
+    }
+}

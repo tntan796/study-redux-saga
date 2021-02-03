@@ -5,7 +5,10 @@ export const ACTION_TYPES = {
     SHOW_TOAST_MESSAGE: 'show toast message',
     CLOSE_TOAST_MESSAGE: 'close toast message',
     SHOW_LOADING: 'show loading',
-    HIDE_LOADING: 'hide loading'
+    HIDE_LOADING: 'hide loading',
+    SEARCH_TASK: 'search task',
+    SEARCH_TASK_SUCCESS: 'search task success',
+    SEARCH_TASK_FAIL: 'search task fail'
 }
 
 export const API_ENDPOINT = 'http://localhost:3210';
