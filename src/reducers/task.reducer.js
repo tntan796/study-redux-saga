@@ -1,6 +1,8 @@
 import { ACTION_TYPES } from "../common/contants";
 var intialState = {
-    list: []
+    list: [],
+    isShowForm: false,
+    editTask: null
 };
 
 const taskReducer = (state = intialState, action) => {
@@ -14,6 +16,10 @@ const taskReducer = (state = intialState, action) => {
         case ACTION_TYPES.SEARCH_TASK_SUCCESS:
             const {data} = action.payload;
             return { ...state, list: data};
+        case ACTION_TYPES.ADD_TASK:
+            const {task} = action.payload;
+            state.list.push(task);
+            return {...state}
         default:
             return { ...state };
     }

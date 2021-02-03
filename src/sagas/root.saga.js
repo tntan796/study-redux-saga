@@ -4,7 +4,8 @@ import { ACTION_TYPES, TOAST } from '../common/contants';
 import * as taskApis from '../apis/task.api';
 import { showToast } from '../actions/toast.action';
 import * as taskActions from '../actions/task.action';
-
+import * as modalActions from '../actions/modal.action';
+import TaskFormComponent from '../components/task-form/task-form.component';
 /**
  * Lấy dữ liệu từ server
  * Bước 1: Gọi api
@@ -46,9 +47,16 @@ function* filterTaskSaga({ payload }) {
     yield put(hideLoading());
 }
 
+function* handleAddTask({payload}) {
+    yield put(modalActions.showModal());
+    yield put(modalActions.changeHeader('Add Task'));
+    yield put(modalActions.changeComponent(<TaskFormComponent handleSave = {this.handleSave} closeModal={this.closeModal}></TaskFormComponent>));
+}
+
 function* rootSaga() {
     yield fork(getTaskList);
     yield takeLatest(ACTION_TYPES.SEARCH_TASK, filterTaskSaga);
+    yield takeLatest(ACTION_TYPES.ADD_TASK, handleAddTask)
 }
 
 export default rootSaga;

@@ -79,3 +79,30 @@ export const searchTaskFail = (error) => {
         }
     }
 }
+
+export const addTask = (task) => {
+    return {
+        type: ACTION_TYPES.ADD_TASK,
+        payload: {
+            task
+        }
+    }
+}
+
+export const addTaskSuccess = (response) => {
+    return {
+        type: ACTION_TYPES.ADD_TASK_SUCCESS,
+        payload: {
+            data: response
+        }
+    }
+}
+
+export const addTaskFail = (error) => {
+    return {
+        type: ACTION_TYPES.ADD_TASK_FAIL,
+        payload: {
+            error
+        }
+    }
+}

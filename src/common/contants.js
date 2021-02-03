@@ -8,7 +8,14 @@ export const ACTION_TYPES = {
     HIDE_LOADING: 'hide loading',
     SEARCH_TASK: 'search task',
     SEARCH_TASK_SUCCESS: 'search task success',
-    SEARCH_TASK_FAIL: 'search task fail'
+    SEARCH_TASK_FAIL: 'search task fail',
+    ADD_TASK: 'add task',
+    ADD_TASK_SUCCESS: 'add task success',
+    ADD_TASK_FAIL: 'add task fail',
+    SHOW_MODAL: 'show modal',
+    CLOSE_MODAL: 'close modal',
+    CHANGE_HEADER: 'change header',
+    CHANGE_COMPONENT: 'change component'
 }
 
 export const API_ENDPOINT = 'http://localhost:3210';
