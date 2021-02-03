@@ -22,7 +22,7 @@ export const fetchListTaskRequest = () => {
         }).catch(error => {
             dispatch(fetchListTaskFail(error))
             dispatch(showToast(TOAST.SEVERITY.ERROR,
-                'Thành công', 'Lấy dữ liệu thất bại'));
+                'Thất bại', 'Lấy dữ liệu thất bại'));
             dispatch(closeToast());
             // dispatch(hideLoading());
         });
