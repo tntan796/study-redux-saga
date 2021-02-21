@@ -31,7 +31,13 @@ class TaskBoardContainer extends Component {
             taskBoadElm = STATUS.map((stt, index) => {
                 const tasksFilter = list.filter(t => (t && t.status === stt.value));
                 return (
-                    <TaskListComponent status = {stt.label} key = {index} tasks = {tasksFilter}></TaskListComponent>
+                    <TaskListComponent
+                        status = {stt.label}
+                        key = {index}
+                        tasks = {tasksFilter}
+                        handleDelete = {this.handleDelete}
+                    >
+                    </TaskListComponent>
                 );
             });
         }
@@ -58,6 +64,12 @@ class TaskBoardContainer extends Component {
         showModal({component: TaskFormComponent});
         changeComponent(<TaskFormComponent handleSave = {this.handleSave}></TaskFormComponent>);
         changeHeader('Thêm mới công việc');
+    }
+
+    handleDelete = (id) => {
+        const {taskActions} = this.props;
+        const {deleteTaskRequest} = taskActions;
+        deleteTaskRequest(id);
     }
 
     render() {

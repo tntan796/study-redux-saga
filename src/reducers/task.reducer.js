@@ -31,6 +31,13 @@ const taskReducer = (state = intialState, action) => {
         case ACTION_TYPES.ADD_TASK_FAIL:
             return { ...state }
 
+        case ACTION_TYPES.DELETE_TASK_SUCCESS:
+            const { id } = action.payload;
+            const list = [...state.list.filter(t => t.id != id)];
+            return { ...state, list};
+
+        case ACTION_TYPES.DELETE_TASK_FAIL:
+            return { ...state }
         default:
             return { ...state };
     }

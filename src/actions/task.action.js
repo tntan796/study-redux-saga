@@ -126,3 +126,30 @@ export const addTaskFail = (error) => {
         }
     }
 }
+
+export const deleteTaskRequest = (id) => {
+    return {
+        type: ACTION_TYPES.DELETE_TASK,
+        payload : {
+            id
+        }
+    }
+}
+
+export const deleteTaskSuccess = (id) => {
+    return {
+        type: ACTION_TYPES.DELETE_TASK_SUCCESS,
+        payload: {
+            id
+        }
+    }
+}
+
+export const deleteTaskFail = (error) => {
+    return {
+        type: ACTION_TYPES.DELETE_TASK_FAIL,
+        payload: {
+            error
+        }
+    }
+}

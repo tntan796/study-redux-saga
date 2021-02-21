@@ -3,16 +3,22 @@ import TaskItemComponent from '../task-item/task-item.component';
 import './task-list.component.css';
 
 export default class TaskListComponent extends Component {
+
     renderTaskItem() {
-        const {tasks} = this.props;
+        const {tasks, handleDelete} = this.props;
         let taskItemElm = null;
         taskItemElm = tasks.map((task, index) => {
             return(
-                <TaskItemComponent key = {index} task = {task}></TaskItemComponent>
+                <TaskItemComponent
+                    key = {index}
+                    task = {task}
+                    handleDelete = {() => handleDelete(task.id)}
+                ></TaskItemComponent>
             );
         });
         return taskItemElm;
     }
+
     render() {
         const {status} = this.props;
         return (

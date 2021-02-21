@@ -15,7 +15,10 @@ export const ACTION_TYPES = {
     SHOW_MODAL: 'show modal',
     CLOSE_MODAL: 'close modal',
     CHANGE_HEADER: 'change header',
-    CHANGE_COMPONENT: 'change component'
+    CHANGE_COMPONENT: 'change component',
+    DELETE_TASK: 'delete task',
+    DELETE_TASK_SUCCESS: 'delete task success',
+    DELETE_TASK_FAIL: 'delete task fail'
 }
 
 export const API_ENDPOINT = 'http://localhost:3210';

@@ -57,6 +57,7 @@ function* handleAddTask({payload}) {
             'Thành công', 'Thêm công việc thành công'));
         yield put(modalActions.closeModal());
     } catch (error) {
+        yield put(taskActions.addTaskFail(error));
         yield put(showToast(TOAST.SEVERITY.ERROR,
             'Thất bại', 'Thêm công việc thất bại'));
     }
@@ -64,10 +65,26 @@ function* handleAddTask({payload}) {
     yield put(hideLoading());
 }
 
+function* handleDeleteTask({payload}) {
+    const {id} = payload;
+    yield put(showLoading());
+    try {
+        yield call(taskApis.deleteTask, id);
+        yield put(taskActions.deleteTaskSuccess(id));
+        yield put(showToast(TOAST.SEVERITY.SUCCESS,
+            'Thành công', 'Xóa công việc thành công'));
+    } catch (error) {
+        console.log(error)
+        yield put(taskActions.deleteTaskFail(error));
+    }
+    yield put(hideLoading());
+}
+
 function* rootSaga() {
     yield fork(getTaskList);
     yield takeLatest(ACTION_TYPES.SEARCH_TASK, filterTaskSaga);
     yield takeLatest(ACTION_TYPES.ADD_TASK, handleAddTask)
+    yield takeLatest(ACTION_TYPES.DELETE_TASK, handleDeleteTask);
 }
 
 export default rootSaga;

@@ -39,16 +39,15 @@ router.get('/tasks', function (req, res, next) {
   res.send(listTask);
 });
 
-router.get('/delete/:id', function (req, res, next) {
+router.delete('/task/:id', function (req, res, next) {
   console.log('Delete');
   const id = req.params.id;
   const deleteIndex = listTask.findIndex(t => t.id == id);
   if (deleteIndex == -1) {
-    res.status(500);
-    res.end();
+    next(error);
   }
   listTask.splice(deleteIndex, 1);
-  res.status(200);
+  res.send(id);
 });
 
 router.get('/search-task', function (req, res, next) {

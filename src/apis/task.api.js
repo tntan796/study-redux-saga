@@ -12,3 +12,7 @@ export const addTask = (task) => {
 export const filterTask = (keyword) => {
     return axiosBaseService.get(`${API_ENDPOINT}/search-task?keyword=${keyword}`);
 }
+
+export const deleteTask = (id) => {
+    return axiosBaseService.delete(`${API_ENDPOINT}/task/${id}`)
+}
