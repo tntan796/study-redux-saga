@@ -23,6 +23,15 @@ class TaskBoardContainer extends Component {
         fetchListTask();
     }
 
+    handleEdit = (task) => {
+        const {modalActions} = this.props;
+        const {showModal, changeComponent, changeHeader} = modalActions;
+        showModal({component: TaskFormComponent});
+        changeComponent(<TaskFormComponent handleSave = {this.handleSave}></TaskFormComponent>);
+        changeHeader('Sửa công việc');
+        taskActions.setEditTask(task);
+    }
+
     renderTaskBoard() {
         let taskBoadElm = null;
         const {task} = this.props;
@@ -36,6 +45,7 @@ class TaskBoardContainer extends Component {
                         key = {index}
                         tasks = {tasksFilter}
                         handleDelete = {this.handleDelete}
+                        handleEdit = {this.handleEdit}
                     >
                     </TaskListComponent>
                 );
@@ -56,6 +66,7 @@ class TaskBoardContainer extends Component {
         const {taskActions} = this.props;
         const {addTaskRequest} = taskActions;
         addTaskRequest(data);
+        
     }
 
     handleAdd = () => {

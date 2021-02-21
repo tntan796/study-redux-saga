@@ -23,6 +23,9 @@ const taskReducer = (state = intialState, action) => {
         case ACTION_TYPES.SEARCH_TASK_FAIL:
             return { ...state, list: [] };
 
+        case ACTION_TYPES.ADD_TASK:
+            return { ...state, editTask: null };
+
         case ACTION_TYPES.ADD_TASK_SUCCESS:
             const { task } = action.payload;
             state.list.push(task);
@@ -38,6 +41,10 @@ const taskReducer = (state = intialState, action) => {
 
         case ACTION_TYPES.DELETE_TASK_FAIL:
             return { ...state }
+
+        case ACTION_TYPES.SET_EDIT_TASK:
+            return {...state, editTask: action.payload.task};
+
         default:
             return { ...state };
     }

@@ -85,6 +85,7 @@ function* rootSaga() {
     yield takeLatest(ACTION_TYPES.SEARCH_TASK, filterTaskSaga);
     yield takeLatest(ACTION_TYPES.ADD_TASK, handleAddTask)
     yield takeLatest(ACTION_TYPES.DELETE_TASK, handleDeleteTask);
+    
 }
 
 export default rootSaga;

@@ -14,6 +14,10 @@ export default class TaskFormComponent extends Component {
         }
     }
 
+    // static getDerivedStateFromProps (nextProps, prevState) {
+    //     if (nextProps.)
+    // }
+
     handleChange = (event) => {
         const target = event.target;
         const value = target.type === 'checkbox' ? target.checked : target.value;

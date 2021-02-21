@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
 import TaskItemComponent from '../task-item/task-item.component';
 import './task-list.component.css';
+import PropTypes from 'prop-types';
 
 export default class TaskListComponent extends Component {
 
     renderTaskItem() {
-        const {tasks, handleDelete} = this.props;
+        const {tasks, handleDelete, handleEdit} = this.props;
         let taskItemElm = null;
         taskItemElm = tasks.map((task, index) => {
             return(
@@ -13,6 +14,7 @@ export default class TaskListComponent extends Component {
                     key = {index}
                     task = {task}
                     handleDelete = {() => handleDelete(task.id)}
+                    handleEdit = {() => handleEdit(task)}
                 ></TaskItemComponent>
             );
         });
@@ -28,4 +30,10 @@ export default class TaskListComponent extends Component {
             </div>
         )
     }
+}
+
+TaskListComponent.props = {
+    tasks: PropTypes.arrayOf(PropTypes.object),
+    handleDelete: PropTypes.func,
+    handleEdit: PropTypes.func
 }

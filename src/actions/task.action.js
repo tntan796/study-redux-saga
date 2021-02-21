@@ -153,3 +153,40 @@ export const deleteTaskFail = (error) => {
         }
     }
 }
+
+export const setEditTask = (task) => {
+    return {
+        type: ACTION_TYPES.SET_EDIT_TASK,
+        payload: {
+            task
+        }
+    }
+}
+
+export const editTaskRequest = (task) => {
+    return {
+        type: ACTION_TYPES.EDIT_TASK,
+        payload: {
+            task
+        }
+    }
+}
+
+export const editTaskSuccess = (task) => {
+    return {
+        type: ACTION_TYPES.EDIT_TASK_SUCCESS,
+        payload: {
+            task
+        }
+    }
+}
+
+
+export const editTaskFail = (error) => {
+    return {
+        type: ACTION_TYPES.EDIT_TASK_FAIL,
+        payload: {
+            error
+        }
+    }
+}

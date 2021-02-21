@@ -18,7 +18,11 @@ export const ACTION_TYPES = {
     CHANGE_COMPONENT: 'change component',
     DELETE_TASK: 'delete task',
     DELETE_TASK_SUCCESS: 'delete task success',
-    DELETE_TASK_FAIL: 'delete task fail'
+    DELETE_TASK_FAIL: 'delete task fail',
+    SET_EDIT_TASK: 'set edit task',
+    EDIT_TASK: 'edit task',
+    EDIT_TASK_SUCCESS: 'edit task success',
+    EDIT_TASK_FAIL: 'edit task fail'
 }
 
 export const API_ENDPOINT = 'http://localhost:3210';
