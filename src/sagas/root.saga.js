@@ -36,15 +36,14 @@ function* getTaskList() {
 
 function* filterTaskSaga({ payload }) {
     yield delay(500);
-    const { search } = payload;
-    const taskList = yield select(state => state.task.list);
     yield put(showLoading());
-    const taskFilter = taskList.filter(task =>
-        task.name
-            .trim()
-            .toLowerCase()
-            .includes(search.trim().toLowerCase()));
-    yield put(taskActions.searchTaskSuccess(taskFilter));
+    const { search } = payload;
+    try {
+        const result = (yield call(taskApis.filterTask, search)).data;
+        yield put(taskActions.searchTaskSuccess(result));
+    } catch (error) {
+        yield put(taskActions.searchTaskFail(error));
+    }
     yield put(hideLoading());
 }
 

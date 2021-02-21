@@ -8,3 +8,7 @@ export const getList = () => {
 export const addTask = (task) => {
     return axiosBaseService.post(`${API_ENDPOINT}/tasks`, task);
 }
+
+export const filterTask = (keyword) => {
+    return axiosBaseService.get(`${API_ENDPOINT}/search-task?keyword=${keyword}`);
+}
