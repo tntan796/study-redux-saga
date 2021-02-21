@@ -4,26 +4,34 @@ import * as modalActions from '../../actions/modal.action';
 import { Dialog } from 'primereact/dialog';
 import TaskFormComponent from '../../components/task-form/task-form.component';
 import { bindActionCreators } from 'redux';
-
+import PropTypes from 'prop-types';
 class ModalComponent extends Component {
-
-    closeModal = () => {
-        modalActions.closeModal();
-    }
-
     render() {
+        const {component, isShowModal, header, modalActions} = this.props;
+        const {closeModal} = modalActions;
         return (
-            <Dialog header={this.props.modal.header} visible={this.props.modal.isShowModal}
-                    style={{width: '50vw'}} modal onHide={() => this.closeModal()}>
-                    {this.props.modal.component}
+            <Dialog header={header} visible={isShowModal}
+                    style={{width: '50vw'}} onHide={() => closeModal()}>
+                    {component}
             </Dialog>
         )
     }
 }
 
+ModalComponent.propTypes = {
+    isShowModal: PropTypes.bool,
+    header: PropTypes.string,
+    component: PropTypes.object,
+    modalActions: PropTypes.shape({
+        closeModal: PropTypes.func
+    })
+}
+
 const mapStateToProps = state => {
     return {
-       modal: state.modal
+        isShowModal: state.modal.isShowModal,
+        header: state.modal.header,
+        component: state.modal.component
     }
 }
 

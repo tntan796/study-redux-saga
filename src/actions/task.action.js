@@ -1,8 +1,9 @@
 import { ACTION_TYPES } from "../common/contants"
 import * as taskApis from '../apis/task.api';
-import { closeToast, showToast} from './toast.action';
-import { showLoading, hideLoading} from './loading.action';
-import {TOAST} from '../common/contants';
+import { closeToast, showToast } from './toast.action';
+import { showLoading, hideLoading } from './loading.action';
+import { TOAST } from '../common/contants';
+import { closeModal } from "./modal.action";
 /**
  * Bước 1: Reset list task về rỗng: fetchListTask
  * Bước 2: Gọi Api lấy data: fetchListTaskRequest
@@ -80,7 +81,7 @@ export const searchTaskFail = (error) => {
     }
 }
 
-export const addTask = (task) => {
+export const addTaskRequest = (task) => {
     return {
         type: ACTION_TYPES.ADD_TASK,
         payload: {
@@ -89,11 +90,30 @@ export const addTask = (task) => {
     }
 }
 
+// export const addTaskRequest = (task) => {
+//     return dispatch => {
+//         dispatch(showLoading);
+//         taskApis.addTask({task}).then(res => {
+//             dispatch(showToast(TOAST.SEVERITY.SUCCESS,
+//                 'Thành công', 'Thêm dữ liệu thành công'));
+//             dispatch(closeToast());
+//             dispatch(hideLoading);
+//             dispatch(closeModal);
+//         }).catch(error => {
+//             dispatch(hideLoading);
+//             dispatch(addTaskFail(error));
+//             dispatch(showToast(TOAST.SEVERITY.ERROR,
+//                 'Thất bại', 'Lấy dữ liệu thất bại'));
+//             dispatch(closeToast());
+//         });
+//     }
+// }
+
 export const addTaskSuccess = (response) => {
     return {
         type: ACTION_TYPES.ADD_TASK_SUCCESS,
         payload: {
-            data: response
+            task: response
         }
     }
 }

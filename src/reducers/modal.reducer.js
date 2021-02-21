@@ -15,7 +15,7 @@ const modalReducer = (state = initialState, action) => {
         case ACTION_TYPES.SHOW_MODAL:
             return { ...state, isShowModal: true};
         case ACTION_TYPES.CLOSE_MODAL:
-            return { ...state, isShowModal: false};
+            return { ...state, isShowModal: false, header: '', component: null};
         default:
             return { ...state };
     }

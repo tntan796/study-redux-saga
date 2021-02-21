@@ -33,6 +33,7 @@ function* getTaskList() {
     }
 }
 
+
 function* filterTaskSaga({ payload }) {
     yield delay(500);
     const { search } = payload;
@@ -48,9 +49,20 @@ function* filterTaskSaga({ payload }) {
 }
 
 function* handleAddTask({payload}) {
-    yield put(modalActions.showModal());
-    yield put(modalActions.changeHeader('Add Task'));
-    yield put(modalActions.changeComponent(<TaskFormComponent handleSave = {this.handleSave} closeModal={this.closeModal}></TaskFormComponent>));
+    const {task} = payload;
+    yield put(showLoading());
+    try {
+        const result = yield call(taskApis.addTask, {task});
+        yield put(taskActions.addTaskSuccess(result.data));
+        yield put(showToast(TOAST.SEVERITY.SUCCESS,
+            'Thành công', 'Thêm công việc thành công'));
+        yield put(modalActions.closeModal());
+    } catch (error) {
+        yield put(showToast(TOAST.SEVERITY.ERROR,
+            'Thất bại', 'Thêm công việc thất bại'));
+    }
+    yield delay(500);
+    yield put(hideLoading());
 }
 
 function* rootSaga() {

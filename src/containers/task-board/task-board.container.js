@@ -9,6 +9,7 @@ import * as taskActions from '../../actions/task.action';
 import SearchBoxComponent from '../../components/search-box/search-box.component';
 import ModalComponent from '../../components/modal/modal.component';
 import * as modalActions from '../../actions/modal.action';
+import TaskFormComponent from '../../components/task-form/task-form.component';
 
 class TaskBoardContainer extends Component {
 
@@ -28,7 +29,7 @@ class TaskBoardContainer extends Component {
         const {list} = task;
         if (list) {
             taskBoadElm = STATUS.map((stt, index) => {
-                const tasksFilter = list.filter(t => t.status === stt.value);
+                const tasksFilter = list.filter(t => (t && t.status === stt.value));
                 return (
                     <TaskListComponent status = {stt.label} key = {index} tasks = {tasksFilter}></TaskListComponent>
                 );
@@ -47,14 +48,16 @@ class TaskBoardContainer extends Component {
     
     handleSave = (data) => {
         const {taskActions} = this.props;
-        const {addTask} = taskActions;
-        addTask(data);
+        const {addTaskRequest} = taskActions;
+        addTaskRequest(data);
     }
 
     handleAdd = () => {
         const {modalActions} = this.props;
-        const {showModal} = modalActions;
-        showModal();
+        const {showModal, changeComponent, changeHeader} = modalActions;
+        showModal({component: TaskFormComponent});
+        changeComponent(<TaskFormComponent handleSave = {this.handleSave}></TaskFormComponent>);
+        changeHeader('Thêm mới công việc');
     }
 
     render() {
