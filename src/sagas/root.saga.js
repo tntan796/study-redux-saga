@@ -80,11 +80,27 @@ function* handleDeleteTask({payload}) {
     yield put(hideLoading());
 }
 
+function* handleEditTask({payload}) {
+    const {task} = payload;
+    yield put(showLoading());
+    try {
+        yield call(taskApis.updateTask, {task});
+        yield put(taskActions.editTaskSuccess(task));
+        yield put(showToast(TOAST.SEVERITY.SUCCESS,
+            'Thành công', 'Cập nhật công việc thành công'));
+    } catch (error) {
+        yield put(showToast(TOAST.SEVERITY.ERROR,
+            'Thất bại', 'Cập nhật công việc thất bại'));
+    }
+    yield put(hideLoading());
+}
+
 function* rootSaga() {
     yield fork(getTaskList);
     yield takeLatest(ACTION_TYPES.SEARCH_TASK, filterTaskSaga);
     yield takeLatest(ACTION_TYPES.ADD_TASK, handleAddTask)
     yield takeLatest(ACTION_TYPES.DELETE_TASK, handleDeleteTask);
+    yield takeLatest(ACTION_TYPES.EDIT_TASK, handleEditTask);
     
 }
 

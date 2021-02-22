@@ -91,4 +91,18 @@ router.post('/tasks', function (req, res, next) {
   }
 });
 
+router.put('/tasks', function(req, res, next) {
+  try {
+    const {task} = req.body;
+    const taskEditIndex = listTask.findIndex(t => t.id == task.id);
+    if (taskEditIndex != -1) {
+      listTask[taskEditIndex] = task;
+    }
+    res.send(task);
+  } catch (error) {
+    next(error);
+    console.log('Edit:', error);
+  }
+})
+
 module.exports = router;

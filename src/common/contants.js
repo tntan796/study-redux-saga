@@ -51,3 +51,10 @@ export const TOAST = {
         ERROR: 'error'
     }
 }
+
+
+export const statusData = [
+    { name: 'Ready', code: 0 },
+    { name: 'Inprogress', code: 1 },
+    { name: 'Complete', code: 2 }
+];

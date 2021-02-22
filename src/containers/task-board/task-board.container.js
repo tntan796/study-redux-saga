@@ -24,12 +24,13 @@ class TaskBoardContainer extends Component {
     }
 
     handleEdit = (task) => {
-        const {modalActions} = this.props;
+        const {modalActions, taskActions} = this.props;
+        const {setEditTask} = taskActions;
         const {showModal, changeComponent, changeHeader} = modalActions;
         showModal({component: TaskFormComponent});
-        changeComponent(<TaskFormComponent handleSave = {this.handleSave}></TaskFormComponent>);
+        changeComponent(<TaskFormComponent editTask={task} handleSave = {this.handleSave}></TaskFormComponent>);
         changeHeader('Sửa công việc');
-        taskActions.setEditTask(task);
+        setEditTask(task);
     }
 
     renderTaskBoard() {
@@ -64,17 +65,22 @@ class TaskBoardContainer extends Component {
     
     handleSave = (data) => {
         const {taskActions} = this.props;
-        const {addTaskRequest} = taskActions;
-        addTaskRequest(data);
-        
+        const {addTaskRequest, editTaskRequest} = taskActions;
+        if (data && data.id) {
+            editTaskRequest(data);
+        } else {
+            addTaskRequest(data);
+        }
     }
 
     handleAdd = () => {
-        const {modalActions} = this.props;
+        const {modalActions, taskActions} = this.props;
+        const {setEditTask} = taskActions;
         const {showModal, changeComponent, changeHeader} = modalActions;
         showModal({component: TaskFormComponent});
         changeComponent(<TaskFormComponent handleSave = {this.handleSave}></TaskFormComponent>);
         changeHeader('Thêm mới công việc');
+        setEditTask(null);
     }
 
     handleDelete = (id) => {

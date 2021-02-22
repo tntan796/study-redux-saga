@@ -16,3 +16,7 @@ export const filterTask = (keyword) => {
 export const deleteTask = (id) => {
     return axiosBaseService.delete(`${API_ENDPOINT}/task/${id}`)
 }
+
+export const updateTask = (task) => {
+    return axiosBaseService.put(`${API_ENDPOINT}/tasks`, task);
+}

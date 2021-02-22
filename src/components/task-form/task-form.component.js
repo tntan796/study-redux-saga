@@ -4,19 +4,30 @@ import { InputText } from 'primereact/inputtext';
 import { InputTextarea } from 'primereact/inputtextarea';
 import { Dropdown } from 'primereact/dropdown';
 import { Button } from 'primereact/button';
+import { statusData} from '../../common/contants';
+
 export default class TaskFormComponent extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            id: 0,
             name: '',
             description: '',
             status: 0
         }
     }
 
-    // static getDerivedStateFromProps (nextProps, prevState) {
-    //     if (nextProps.)
-    // }
+    static getDerivedStateFromProps (nextProps, prevState) {
+        console.log('prevState:', prevState);
+        if (JSON.stringify(nextProps.editTask) != JSON.stringify(prevState.editTask)) {
+            const status = statusData.filter(t => t.code ==  nextProps.editTask.status)[0];
+            const result = {...nextProps.editTask, status};
+            console.log('result:', result);
+            return result;
+        }
+        return null;
+    }
+
 
     handleChange = (event) => {
         const target = event.target;
@@ -34,14 +45,7 @@ export default class TaskFormComponent extends Component {
     }
 
     render() {
-        const statusData = [
-            { name: 'Ready', code: 0 },
-            { name: 'Inprogress', code: 1 },
-            { name: 'Complete', code: 2 }
-        ];
-
         const {name, description, status} = this.state;
-
         return (
             <div className="card">
                 <div className="p-fluid p-grid">

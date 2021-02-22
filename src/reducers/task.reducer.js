@@ -45,6 +45,17 @@ const taskReducer = (state = intialState, action) => {
         case ACTION_TYPES.SET_EDIT_TASK:
             return {...state, editTask: action.payload.task};
 
+        case ACTION_TYPES.EDIT_TASK_SUCCESS:
+            const taskEdit = action.payload.task;
+            const taskEditIndex = state.list.findIndex(t => t.id == taskEdit.id);
+            if (taskEditIndex !== -1) {
+                state.list[taskEditIndex] = taskEdit;
+            }
+            return { ...state, list};
+
+        case ACTION_TYPES.EDIT_TASK_FAIL:
+            return { ...state }
+
         default:
             return { ...state };
     }
