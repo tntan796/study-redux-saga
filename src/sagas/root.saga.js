@@ -91,6 +91,7 @@ function* handleEditTask({payload}) {
     } catch (error) {
         yield put(showToast(TOAST.SEVERITY.ERROR,
             'Thất bại', 'Cập nhật công việc thất bại'));
+            console.log('Update fail:', error);
     }
     yield put(hideLoading());
 }

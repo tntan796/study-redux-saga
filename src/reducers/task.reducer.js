@@ -51,7 +51,7 @@ const taskReducer = (state = intialState, action) => {
             if (taskEditIndex !== -1) {
                 state.list[taskEditIndex] = taskEdit;
             }
-            return { ...state, list};
+            return { ...state};
 
         case ACTION_TYPES.EDIT_TASK_FAIL:
             return { ...state }

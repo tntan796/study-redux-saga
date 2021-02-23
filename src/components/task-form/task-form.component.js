@@ -13,16 +13,15 @@ export default class TaskFormComponent extends Component {
             id: 0,
             name: '',
             description: '',
-            status: 0
+            status: 0,
+            lastedState: null
         }
     }
 
     static getDerivedStateFromProps (nextProps, prevState) {
-        console.log('prevState:', prevState);
-        if (JSON.stringify(nextProps.editTask) != JSON.stringify(prevState.editTask)) {
-            const status = statusData.filter(t => t.code ==  nextProps.editTask.status)[0];
-            const result = {...nextProps.editTask, status};
-            console.log('result:', result);
+        if (JSON.stringify(nextProps.editTask) != JSON.stringify(prevState.lastedState)) {
+            const status = nextProps.editTask ? statusData.filter(t => t.code ==  nextProps.editTask.status)[0] : statusData[0];
+            const result = {...nextProps.editTask, status, lastedState: nextProps.editTask};
             return result;
         }
         return null;
@@ -40,6 +39,7 @@ export default class TaskFormComponent extends Component {
 
     handleSave() {
         const dataSave = {...this.state};
+        delete dataSave.lastedState;
         dataSave.status = dataSave.status ? dataSave.status.code : 0;
         this.props.handleSave(dataSave);
     }
